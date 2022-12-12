@@ -1,7 +1,7 @@
 <?php
 
 const DAY_NUMBER = 7;
-const AOC_AUTH_COOKIE = 'session=53616c7465645f5f64dba38c6e378facdd0fe6f50bad7d5f19b0c1775a85fb5cdd46648328f57bb957e1a9103de04f938416516e6e8f3a5dd7064eaa14a9db49';
+const AOC_AUTH_COOKIE = 'AOC_AUTH_COOKIE';
 
 $file = getInputByData(DAY_NUMBER);
 $command_groups = explode("\n$ ", $file);
@@ -83,7 +83,7 @@ function getInputByData(int $day): string
     $opts = [
         "http" => [
             "method" => "GET",
-            "header" => "Accept-language: en\r\nCookie: " . AOC_AUTH_COOKIE . "\r\n"
+            "header" => "Accept-language: en\r\nCookie: " . getenv(AOC_AUTH_COOKIE) . "\r\n"
         ]
     ];
 
