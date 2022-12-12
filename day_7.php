@@ -1,7 +1,8 @@
 <?php
 
+include_once(__DIR__ . '/shared.php');
+
 const DAY_NUMBER = 7;
-const AOC_AUTH_COOKIE = 'AOC_AUTH_COOKIE';
 
 $file = getInputByData(DAY_NUMBER);
 $command_groups = explode("\n$ ", $file);
@@ -76,20 +77,6 @@ function count_folder_size($current_path, int $size): void
         $path = join('/', array_slice($current_path, 0, $i));
         State::$folder_size[$path] = isset(State::$folder_size[$path]) ? State::$folder_size[$path] + $size : $size;
     }
-}
-
-function getInputByData(int $day): string
-{
-    $opts = [
-        "http" => [
-            "method" => "GET",
-            "header" => "Accept-language: en\r\nCookie: " . getenv(AOC_AUTH_COOKIE) . "\r\n"
-        ]
-    ];
-
-    $context = stream_context_create($opts);
-    $file = file_get_contents('https://adventofcode.com/2022/day/' . $day . '/input', false, $context);
-    return $file;
 }
 
 class State
